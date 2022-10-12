@@ -36,6 +36,11 @@ public class Book implements Comparable<Book> {
     @Column(length = 700, columnDefinition = "TEXT")
     private String review;
 
+    public Book(final String reference, final String title, final String review) {
+        this.reference = reference;
+        this.title = title;
+        this.review = review;
+    }
 
     @Override
     public boolean equals(final Object o) {
