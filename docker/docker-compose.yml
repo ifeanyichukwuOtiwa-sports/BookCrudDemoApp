@@ -1,0 +1,8 @@
+services:
+  book-mysql:
+    image: mysql:8.0.30-oracle
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=book_mysql
+    ports:
+      - "3306:3306"

@@ -14,7 +14,7 @@ import io.regent.bookcruddemo.repository.api.BookRepositoryApi;
  */
 
 @Repository
-@ConditionalOnProperty(name ="enable", prefix = "use.repository.stub", havingValue = "false", matchIfMissing = false)
+@ConditionalOnProperty(name ="enable", prefix = "use.repository.stub", havingValue = "false", matchIfMissing = true)
 public interface BookRepositoryApiJPA extends BookRepositoryApi, JpaRepository<Book, String> {
     @Query("SELECT b FROM Book b WHERE b.reference = :reference")
     Book retrieveBook(String bookReference);

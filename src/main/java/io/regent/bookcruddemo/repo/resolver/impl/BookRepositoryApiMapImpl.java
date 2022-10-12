@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import io.regent.bookcruddemo.entity.Book;
 import io.regent.bookcruddemo.repository.api.BookRepositoryApi;
@@ -14,8 +15,8 @@ import io.regent.bookcruddemo.repository.api.BookRepositoryApi;
  * 12/10/2022
  */
 
-@Repository
-@ConditionalOnProperty(name ="enable", prefix = "use.repository.stub", havingValue = "true", matchIfMissing = false)
+@Service
+@ConditionalOnProperty(name = "use.repository.stub.enable", havingValue = "true")
 public class BookRepositoryApiMapImpl implements BookRepositoryApi {
 
     private static final String BOOK_REFERENCE_PREFIX = "BOOK-";
