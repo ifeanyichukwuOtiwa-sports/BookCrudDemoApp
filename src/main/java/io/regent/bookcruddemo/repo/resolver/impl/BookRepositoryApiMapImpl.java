@@ -1,14 +1,13 @@
-package io.regent.bookcruddemo.repository.impl;
+package io.regent.bookcruddemo.repo.resolver.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import io.regent.bookcruddemo.entity.Book;
-import io.regent.bookcruddemo.repository.api.BookRepositoryApi;
+import io.regent.bookcruddemo.repo.resolver.api.BookRepositoryApi;
 
 /**
  * Created by @author Ifeanyichukwu Otiwa

@@ -1,4 +1,4 @@
-package io.regent.bookcruddemo.repository.api;
+package io.regent.bookcruddemo.repo.resolver.api;
 
 import io.regent.bookcruddemo.entity.Book;
 
