@@ -3,11 +3,12 @@ package io.regent.bookcruddemo.service.impl;
 import java.util.Arrays;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 import io.regent.bookcruddemo.entity.Book;
 import io.regent.bookcruddemo.exceptions.BookNotFoundException;
 import io.regent.bookcruddemo.exceptions.WrongBookReferenceException;
-import io.regent.bookcruddemo.repository.api.BookRepositoryApi;
+import io.regent.bookcruddemo.repo.resolver.api.BookRepositoryApi;
 import io.regent.bookcruddemo.service.api.BookServiceApi;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 @RequiredArgsConstructor
+@Service
 public class BookServiceApiImpl implements BookServiceApi {
 
     private static final int DEFAULT = 9;
