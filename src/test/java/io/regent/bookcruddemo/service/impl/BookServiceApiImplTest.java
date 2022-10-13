@@ -9,13 +9,11 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import io.regent.bookcruddemo.entity.Book;
-import io.regent.bookcruddemo.exceptions.BookNotFoundException;
-import io.regent.bookcruddemo.exceptions.WrongBookReferenceException;
+import io.regent.bookcruddemo.exceptions.BookException;
 import io.regent.bookcruddemo.repo.resolver.api.BookRepositoryApi;
 import io.regent.bookcruddemo.repo.resolver.impl.BookRepositoryApiJpaAdapter;
 import io.regent.bookcruddemo.repository.api.BookRepositoryApiJPA;
@@ -61,8 +59,8 @@ class BookServiceApiImplTest {
     @Test
     void retrieveBookFailsForInvalidBookReference() {
         String invalidBookReference = "INVALID_REFERENCE";
-        WrongBookReferenceException exception = assertThrows(
-                WrongBookReferenceException.class,
+        BookException exception = assertThrows(
+                BookException.class,
                 () -> serviceUnderTest.retrieveBook(invalidBookReference)
         );
         String expectedErrorMessage = exception.getMessage();
@@ -74,8 +72,8 @@ class BookServiceApiImplTest {
     void retrieveBookFailsForBookNotInStore() {
         String referenceForBookNotInStore = "BOOK-NOT IN STORE";
         when(bookRepository.existsByReference(referenceForBookNotInStore)).thenReturn(false);
-        BookNotFoundException exception = assertThrows(
-                BookNotFoundException.class,
+        BookException exception = assertThrows(
+                BookException.class,
                 () -> serviceUnderTest.retrieveBook(referenceForBookNotInStore)
         );
         String expectedErrorMessage = exception.getMessage();
@@ -85,7 +83,7 @@ class BookServiceApiImplTest {
 
 
     @Test
-    void getBookSummarySuccessfulForBookInStore() throws WrongBookReferenceException, BookNotFoundException {
+    void getBookSummarySuccessfulForBookInStore() throws BookException {
         final Book winnieBook = new Book(WINNIE_THE_POOH_REFERENCE, "Winnie The Pooh", "In this first volume we meet all the friends from the Hundred Acre Wood.");
         when(bookRepository.retrieveBook(WINNIE_THE_POOH_REFERENCE)).thenReturn(winnieBook);
         when(bookRepository.existsByReference(WINNIE_THE_POOH_REFERENCE)).thenReturn(true);
