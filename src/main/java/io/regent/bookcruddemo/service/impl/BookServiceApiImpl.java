@@ -44,7 +44,7 @@ public class BookServiceApiImpl implements BookServiceApi {
 
     private void validateBookReference(String bookReference) throws BookException {
         if(!bookReference.startsWith("BOOK-")){
-            throw new BookException(HttpStatus.BAD_REQUEST, "Book reference must begin with BOOK-");
+            throw new BookException(400, "Book reference must begin with BOOK-");
         }
 
         if (!bookRepository.existsByReference(bookReference)){
