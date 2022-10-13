@@ -18,10 +18,6 @@ public class BookException extends NestedRuntimeException {
     @Nullable
     private final String reason;
 
-    public BookException(HttpStatus status) {
-        this(status, (String)null);
-    }
-
     public BookException(HttpStatus status, @Nullable String reason) {
         super("");
         Assert.notNull(status, "HttpStatus is required");
@@ -37,7 +33,7 @@ public class BookException extends NestedRuntimeException {
     }
 
     public HttpStatus getStatus() {
-        return HttpStatus.valueOf(this.status);
+        return HttpStatus.valueOf(this.getRawStatusCode());
     }
 
     public int getRawStatusCode() {

@@ -20,8 +20,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Book implements Comparable<Book> {
 
