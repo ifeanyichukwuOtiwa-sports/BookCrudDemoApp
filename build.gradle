@@ -43,6 +43,7 @@ sonarqube {
         property "sonar.projectKey", "BookCrudDemoApp"
         property "sonar.organization", "codewithwinnie"
         property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.branch.name", "develop"
     }
 }
 
