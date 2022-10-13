@@ -51,7 +51,6 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.branch.name", "develop"
         property "sonar.coverage.jacoco.xmlReportPaths", paths
-        property "sonar.branch.target", "develop"
     }
 }
 
