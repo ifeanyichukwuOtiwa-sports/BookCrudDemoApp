@@ -13,23 +13,23 @@ import org.springframework.util.Assert;
  */
 
 
-public class WrongBookReferenceException extends NestedRuntimeException {
+public class BookException extends NestedRuntimeException {
     private final int status;
     @Nullable
     private final String reason;
 
-    public WrongBookReferenceException(HttpStatus status) {
+    public BookException(HttpStatus status) {
         this(status, (String)null);
     }
 
-    public WrongBookReferenceException(HttpStatus status, @Nullable String reason) {
+    public BookException(HttpStatus status, @Nullable String reason) {
         super("");
         Assert.notNull(status, "HttpStatus is required");
         this.status = status.value();
         this.reason = reason;
     }
 
-    public WrongBookReferenceException(final int rawStatus, @Nullable final String reason) {
+    public BookException(final int rawStatus, @Nullable final String reason) {
         super("");
         Assert.state(rawStatus != 0, "HttpStatus is required");
         this.status = rawStatus;

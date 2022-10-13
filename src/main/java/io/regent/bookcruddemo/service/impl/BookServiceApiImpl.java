@@ -6,8 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import io.regent.bookcruddemo.entity.Book;
-import io.regent.bookcruddemo.exceptions.BookNotFoundException;
-import io.regent.bookcruddemo.exceptions.WrongBookReferenceException;
+import io.regent.bookcruddemo.exceptions.BookException;
 import io.regent.bookcruddemo.repo.resolver.api.BookRepositoryApi;
 import io.regent.bookcruddemo.service.api.BookServiceApi;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +23,13 @@ public class BookServiceApiImpl implements BookServiceApi {
     private static final int DEFAULT = 9;
     private final BookRepositoryApi bookRepository;
     @Override
-    public Book retrieveBook(final String bookReference) throws BookNotFoundException, WrongBookReferenceException {
+    public Book retrieveBook(final String bookReference) throws BookException {
         validateBookReference(bookReference);
         return bookRepository.retrieveBook(bookReference);
     }
 
     @Override
-    public String getBookSummary(final String bookReference) throws BookNotFoundException, WrongBookReferenceException {
+    public String getBookSummary(final String bookReference) throws BookException {
         validateBookReference(bookReference);
         StringBuilder bookSummary = new StringBuilder();
         Book storedBook = bookRepository.retrieveBook(bookReference);
@@ -43,14 +42,13 @@ public class BookServiceApiImpl implements BookServiceApi {
         return bookSummary.toString();
     }
 
-    private void validateBookReference(String bookReference) throws WrongBookReferenceException,
-            BookNotFoundException {
+    private void validateBookReference(String bookReference) throws BookException {
         if(!bookReference.startsWith("BOOK-")){
-            throw new WrongBookReferenceException(HttpStatus.BAD_REQUEST, "Book reference must begin with BOOK-");
+            throw new BookException(HttpStatus.BAD_REQUEST, "Book reference must begin with BOOK-");
         }
 
         if (!bookRepository.existsByReference(bookReference)){
-            throw new BookNotFoundException(HttpStatus.NOT_FOUND, "Book not found");
+            throw new BookException(HttpStatus.NOT_FOUND, "Book not found");
         }
     }
 }
