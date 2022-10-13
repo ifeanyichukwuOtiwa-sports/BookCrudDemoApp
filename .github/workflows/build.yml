@@ -1,10 +1,14 @@
 name: Build
 on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - develop
+      - release/*
   push:
     branches:
       - develop
-  pull_request:
-    types: [opened, synchronize, reopened]
+  
 jobs:
   build:
     name: Build
@@ -35,3 +39,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew clean build --parallel sonarqube --info
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+        if: ${{ !cancelled() }}
