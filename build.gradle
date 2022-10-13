@@ -38,12 +38,19 @@ dependencyManagement {
     }
 }
 
+def paths = new HashSet<>()
+
+rootProject.subprojects.forEach(p -> {
+    paths.add("${p.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+})
+
 sonarqube {
     properties {
         property "sonar.projectKey", "BookCrudDemoApp"
         property "sonar.organization", "codewithwinnie"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.branch.name", "develop"
+        property "sonar.coverage.jacoco.xmlReportPaths", paths
     }
 }
 
